@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>whilst</title>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="favicon.png"/>
+  <style>
+    body {
+      margin: 0px;
+      display: flex;
+      justify-content: center;
+      background: black;
+    }
+
+    pre {
+      margin: 0px;
+      padding: 100px 0px;
+      font-family: 'Courier', monospace;
+      font-size: 12pt;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+</body>
+
+<script>
+  const pre = document.createElement('pre');
+  document.body.appendChild(pre);
+
+  fetch('de-rerum-natura.txt')
+  .then(response => response.text())
+  .then(corpus => pre.innerHTML = corpus
+    .split('\n')
+    .filter(line => line.match(/[a-z]/g))
+    .filter(line => line.match(/  /g))
+    .join('\n')
+  );
+</script>
+
+</html>
