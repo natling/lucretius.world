@@ -1,4 +1,6 @@
-const corpus = `BOOK I
+const corpus =
+
+`BOOK I
 
 
 
@@ -10320,12 +10322,13 @@ Would, on the frames of alien funeral pyres,
 Place their own kin, and thrust the torch beneath
 Oft brawling with much bloodshed round about
 Rather than quit dead bodies loved in life.`
+
 .split('\n')
-.filter(line => ! line.match(/^[A-Z ]+$/g))
-.map(line => line.replace(/[.,\/#!?$%\^&\*;:{}\[\]=\_`"“”~()]/g, ''))
-.map(line => line.replace(/’/g, '\''))
-.map(line => line.replace(/ *-- */g, ' '))
-.map(line => line.replace(/ +/g, ' '))
-.filter(line => line.length != 0)
-.map(line => line.trim())
-.map(line => line.toLowerCase());
+.filter(line => line.match(/[a-z]/g))
+.map(line => line
+	.replace(/[!"()*,.:;?\[\]]/g, '')
+	.replace(/--/g, ' ')
+	.replace(/ +/g, ' ')
+	.toLowerCase()
+	.trim()
+);
