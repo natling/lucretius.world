@@ -27,12 +27,15 @@
 </body>
 
 <script>
-  fetch('welf.txt')
+  fetch('wel.txt')
   .then(response => response.text())
   .then(text => document.body.appendChild(document.createElement('p')).innerHTML = text
-    .toLowerCase()
+    .split('\n')
+    .filter(line => /[a-z]/.test(line))
+    .join('\n')
     .replace(/[!"(),.:;?–]/g, '')
     .replace(/\s+/g, ' ')
+    .toLowerCase()
   );
 </script>
 
