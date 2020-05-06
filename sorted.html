@@ -2,25 +2,23 @@
 <html>
 
 <head>
-  <title>de rerum natura</title>
+  <title>sorted</title>
   <meta charset="UTF-8">
   <link rel="shortcut icon" href="favicon.png"/>
   <style>
     body {
       margin: 0;
       background: black;
+      color: white;
     }
 
     p {
       margin: 0;
       padding: 100px;
-      box-sizing: border-box;
-      color: white;
-      font-family: 'Courier', monospace;
-      font-size: 9pt;
-      text-align: justify;
-      line-height: 1;
+      font: 9pt Courier, monospace;
       letter-spacing: -0.2px;
+      line-height: 1;
+      text-align: justify;
     }
   </style>
 </head>
@@ -28,22 +26,18 @@
 <body>
 </body>
 
-<script src="de-rerum-natura.js"></script>
-
 <script>
-  const p = document.createElement('p');
-  document.body.appendChild(p);
-
-  p.innerHTML = corpus
-  .join(' ')
-  .replace(/-/g, ' ')
-  .split(' ')
-  .filter(word => ! word.includes('\''))
-  .sort((a, b) => {
-    const dif = b.length - a.length;
-    return Math.abs(dif) > 0 ? dif : a > b ? 1 : -1;
-  })
-  .join(' ');
+  fetch('leonard.txt')
+  .then(response => response.text())
+  .then(text => document.body.appendChild(document.createElement('p')).innerHTML = text
+    .toLowerCase()
+    .replace(/[!"(),.:;?–]/g, '')
+    .replace(/-/g, ' ')
+    .split(/\s+/)
+    .filter(word => ! /'/.test(word))
+    .sort((a, b) => b.length - a.length || a.localeCompare(b))
+    .join(' ')
+  );
 </script>
 
 </html>

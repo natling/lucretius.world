@@ -11,14 +11,15 @@
       display: flex;
       justify-content: center;
       background: black;
+      color: white;
     }
 
     pre {
       margin: 0;
       padding: 100px 0;
-      font-family: 'Courier', monospace;
-      font-size: 12pt;
-      color: white;
+      font: 12pt Courier, monospace;
+      letter-spacing: -0.5px;
+      line-height: 1;
     }
   </style>
 </head>
@@ -27,15 +28,11 @@
 </body>
 
 <script>
-  const pre = document.createElement('pre');
-  document.body.appendChild(pre);
-
-  fetch('de-rerum-natura.txt')
+  fetch('leonard-raw.txt')
   .then(response => response.text())
-  .then(corpus => pre.innerHTML = corpus
+  .then(text => document.body.appendChild(document.createElement('pre')).innerHTML = text
     .split('\n')
-    .filter(line => line.match(/[a-z]/g))
-    .filter(line => line.match(/  /g))
+    .filter(line => /^  /.test(line))
     .join('\n')
   );
 </script>
