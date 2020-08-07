@@ -28,9 +28,10 @@
 </body>
 
 <script>
-  fetch('aes.txt')
-  .then(response => response.text())
-  .then(text => document.body.appendChild(document.createElement('pre')).innerHTML = text);
+  (async () => {
+    document.body.appendChild(document.createElement('pre'))
+    .innerHTML = (await (await fetch('aes.txt')).text())
+  })()
 </script>
 
 </html>

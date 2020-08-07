@@ -28,13 +28,13 @@
 </body>
 
 <script>
-  fetch('wel-r.txt')
-  .then(response => response.text())
-  .then(text => document.body.appendChild(document.createElement('pre')).innerHTML = text
+  (async () => {
+    document.body.appendChild(document.createElement('pre'))
+    .innerHTML = (await (await fetch('wel-r.txt')).text())
     .split('\n')
     .filter(line => /^  /.test(line))
     .join('\n')
-  );
+  })()
 </script>
 
 </html>

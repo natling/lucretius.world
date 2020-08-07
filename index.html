@@ -27,16 +27,16 @@
 </body>
 
 <script>
-  fetch('wel.txt')
-  .then(response => response.text())
-  .then(text => document.body.appendChild(document.createElement('p')).innerHTML = text
+  (async () => {
+    document.body.appendChild(document.createElement('p'))
+    .innerHTML = (await (await fetch('wel.txt')).text())
     .split('\n')
     .filter(line => /[a-z]/.test(line))
     .join('\n')
     .replace(/[!"(),.:;?–]/g, '')
     .replace(/\s+/g, ' ')
     .toLowerCase()
-  );
+  })()
 </script>
 
 </html>
