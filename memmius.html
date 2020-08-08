@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>memmius</title>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="favicon.png"/>
+  <style>
+    body {
+      margin: 0;
+      min-width: min-content;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: black;
+      color: white;
+    }
+
+    pre {
+      margin: 100px;
+      font: 16px Courier, monospace;
+      letter-spacing: -0.5px;
+      line-height: 1;
+    }
+  </style>
+</head>
+
+<body>
+</body>
+
+<script>
+  (async () => {
+    document.body.appendChild(document.createElement('pre'))
+    .innerHTML = (await (await fetch('aes.txt')).text())
+    .replace(/[!"(),.:;?–]/g, '')
+    .replace(/ +/g, ' ')
+    .split('\n')
+    .filter(line => /[a-z]/.test(line))
+    .map(line => line.toLowerCase().trim())
+    .sort((a, b) => b.length - a.length)
+    .filter(line => /memm/.test(line))
+    .join('\n')
+  })()
+</script>
+
+</html>
